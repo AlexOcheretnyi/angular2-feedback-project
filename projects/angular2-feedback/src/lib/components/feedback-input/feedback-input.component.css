@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.feedback-input {
+  box-sizing: border-box;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #e8e8e8;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  outline: none;
+}

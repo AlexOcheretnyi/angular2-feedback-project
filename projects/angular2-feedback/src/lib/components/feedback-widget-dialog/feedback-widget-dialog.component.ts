@@ -1,0 +1,83 @@
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators }                                                           from '@angular/forms';
+
+import { FeedbackPosition, EmojiName } from '../../feedback-widget.type';
+import { FeedbackWidgetService }       from '../../feedback-widget.service';
+
+import html2canvas from 'html2canvas';
+
+// @dynamic
+@Component({
+  selector: 'feedback-widget-dialog',
+  templateUrl: './feedback-widget-dialog.component.html',
+  styleUrls: ['./feedback-widget-dialog.component.css'],
+  encapsulation: ViewEncapsulation.None
+})
+export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
+  @ViewChild('feedbackDialog') feedbackDialog: ElementRef;
+
+  @Input() feedbackEmojis: EmojiName[];
+  @Input() feedbackDialogPosition: FeedbackPosition;
+  @Input() feedbackRateTitle: string;
+  @Input() feedbackEmailTitle: string;
+  @Input() feedbackPlaceholder: string;
+
+  public feedbackForm: FormGroup;
+
+  public isFeedbackSubmitted: boolean = false;
+
+  constructor(private fb: FormBuilder,
+              private renderer2: Renderer2,
+              private _feedbackWidgetService: FeedbackWidgetService) { }
+
+  ngOnInit() {
+    this._initForm();
+  }
+
+  ngAfterViewInit() {
+    this._removeAriseClass();
+  }
+
+  public onSubmit(isEmail: boolean): void {
+    if (!isEmail) { this.feedbackForm.patchValue({email: null}); }
+    this._feedbackWidgetService.setFeedbackOutput = this.feedbackForm.value;
+    this._feedbackWidgetService.feedbackWidgetClose();
+  }
+
+  public onFeedbackSubmit() {
+    const screenshotElem = this._feedbackWidgetService.getScreenshotElement;
+    if (screenshotElem) { this._createElementScreenshot(screenshotElem); }
+    this.isFeedbackSubmitted = true;
+  }
+
+  public onFeedbackDialogClosed(): void {
+    this._feedbackWidgetService.feedbackWidgetClose();
+  }
+
+  private _createElementScreenshot(screenshotElem: HTMLElement): void {
+    html2canvas(screenshotElem).then(canvas => {
+      canvas.toBlob((blob) => {
+        const formData = new FormData();
+        formData.append('screenshot', blob, `${new Date().toUTCString()}.jpeg`);
+        this.feedbackForm.get('screenshot').setValue(formData.get('screenshot'));
+        this._feedbackWidgetService.feedbackScreenshotCreate();
+      }, 'image/jpeg', 0.5);
+    });
+  }
+
+  private _initForm() {
+   this.feedbackForm = this.fb.group({
+     feedback: ['', Validators.required],
+     emoji: [null],
+     screenshot: [null],
+     email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+   });
+  }
+
+  private _removeAriseClass() {
+    setTimeout(() => {
+      this.renderer2.removeClass(this.feedbackDialog.nativeElement, 'feedback-dialog--arise');
+    }, 1500);
+
+  }
+}

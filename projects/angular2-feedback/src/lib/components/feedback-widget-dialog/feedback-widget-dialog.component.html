@@ -1,0 +1,60 @@
+<div #feedbackDialog class="feedback-dialog feedback-dialog--{{feedbackDialogPosition}} feedback-dialog--arise">
+  <div
+    [formGroup]="feedbackForm"
+    class="feedback-dialog__container fw-flex--column fw-flex--align-center"
+  >
+    <button
+      id="fw-btn-close"
+      class="feedback-btn__close"
+      (click)="onFeedbackDialogClosed()"
+    ></button>
+    <p
+      *ngIf="!feedbackForm.get('emoji').value"
+      class="feedback__title-intro"> {{ feedbackRateTitle }}
+    </p>
+    <feedback-emoji-list
+      *ngIf="!isFeedbackSubmitted"
+      formControlName="emoji"
+      [feedbackEmojis]="feedbackEmojis">
+    </feedback-emoji-list>
+    <ng-container *ngIf="feedbackForm.get('emoji').value && !this.isFeedbackSubmitted">
+      <feedback-textarea [placeholder]="feedbackPlaceholder" formControlName="feedback"></feedback-textarea>
+      <feedback-screenshot></feedback-screenshot>
+      <div class="fw-flex--end-center feedback-submit__container">
+        <button
+          class="feedback-btn feedback-btn__submit"
+          [disabled]="feedbackForm.get('feedback').invalid"
+          type="button"
+          (click)="onFeedbackSubmit()"
+        >
+          Send
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isFeedbackSubmitted">
+      <p class="feedback-title__email">{{ feedbackEmailTitle }}</p>
+      <feedback-input type="email" formControlName="email"></feedback-input>
+      <div class="fw-flex--end-center feedback-submit__container">
+        <button
+          class="feedback-btn feedback-btn__skip"
+          type="button"
+          (click)="onSubmit(false)"
+        >
+          Skip
+        </button>
+        <button
+          class="feedback-btn feedback-btn__submit"
+          type="button"
+          [disabled]="feedbackForm.get('email').invalid"
+          (click)="onSubmit(true)"
+        >
+          Send
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+

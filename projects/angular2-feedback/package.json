@@ -1,6 +1,14 @@
 {
   "name": "angular2-feedback",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Feedback widget with selected element screenshot function.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexOcheretnyi/angular2-feedback-project.git"
+  },
+  "author": "me",
+  "homepage": "https://github.com/AlexOcheretnyi/angular2-feedback-project#readme",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^9.1.9",
     "@angular/core": "^9.1.9",

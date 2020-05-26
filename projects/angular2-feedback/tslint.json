@@ -4,14 +4,15 @@
     "directive-selector": [
       true,
       "attribute",
-      "lib",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "lib",
       "kebab-case"
-    ]
+    ],
+    "import-spacing": false,
+    "no-inferrable-types": false,
+    "variable-name": false
   }
 }

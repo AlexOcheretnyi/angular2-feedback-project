@@ -3,5 +3,6 @@
   "dest": "../../dist/angular2-feedback",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["."]
 }

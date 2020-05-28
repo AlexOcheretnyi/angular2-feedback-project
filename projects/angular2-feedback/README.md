@@ -31,9 +31,29 @@ Add the Angular2FeedbackComponent in to your AppComponent.
 
 ```shell
 ...
-template: `<angular2-feedback></angular2-feedback>`
+template: '<angular2-feedback></angular2-feedback>'
 ...
 ```
+
+The options and events that can be used when working with feedback widget.
+
+```shell
+<angular2-feedback 
+    [feedbackEmojis]="emojis"
+    [feedbackWidgetOptions]="options"
+    (feedbackStart)="onStart()"
+    (feedbackDialogClosed)="onClose()"
+    (feedbackOutput)="onOutput($event)"
+  ></angular2-feedback>
+```
+
+## Options
+  
+   
+   
+    
+    
+
 
 ## Publishing
 

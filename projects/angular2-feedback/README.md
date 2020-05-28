@@ -48,21 +48,28 @@ The options and events that can be used when working with feedback widget.
 ```
 
 ## Options
+   Feedback widget options
+   
+   Option | Type | Default
+   ------------- | ------------- | -------------
+   __feedbackEmojis__ | `Array<string>(5)` | `['hate', 'dislike', 'neutral', 'like', 'love']`
+   __feedbackWidgetOptions__ | `FeedbackWidgetOptions` | `{ buttonText: 'Feedback', buttonClass: 'feedback-btn__start', buttonSize: 'medium', feedbackPosition: 'right', feedbackSuccessTitle:  FEEDBACK_SUCCESS_TITLE, feedbackRateTitle: FEEDBACK_RATE_TITLE, feedbackEmailTitle: FEEDBACK_EMAIL_TITLE, feedbackPlaceholder: FEEDBACK_PLACEHOLDER }`
+   
+   FeedbackWidgetOption interface
+   
+   ```shell
+    interface FeedbackWidgetOptions {
+      buttonSize?: ButtonSize;
+      feedbackPosition?: FeedbackPosition;
+      buttonClass?: string;
+      buttonText?: string;
+      feedbackSuccessTitle?: string;
+      feedbackRateTitle?: string;
+      feedbackEmailTitle?: string;
+      feedbackPlaceholder?: string;
+    }
+   ```
   
-   
-   
-    
-    
-
-
-## Publishing
-
-After building your library with `ng build angular2-feedback`, go to the dist folder `cd dist/angular2-feedback` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test angular2-feedback` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  ## License
+  
+  MIT © [Ochreretnyi Oleksandr](mailto:ochierietnii@gmail.com)

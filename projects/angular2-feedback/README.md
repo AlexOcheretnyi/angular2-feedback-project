@@ -1,11 +1,14 @@
-# Angular2Feedback
+# Angular2-Feedback
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+> A light and easy to use feedback library for Angular 2. Its feature dedicated to store user's feedback. 
 
-## Code scaffolding
+# Setup
 
-Run `ng generate component component-name --project angular2-feedback` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular2-feedback`.
-> Note: Don't forget to add `--project angular2-feedback` or else it will be added to the default project in your `angular.json` file. 
+Install library
+
+```shell
+npm install --save angular2-feedback
+```
 
 ## Build
 

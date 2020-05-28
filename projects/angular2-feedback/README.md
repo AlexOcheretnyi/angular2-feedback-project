@@ -2,7 +2,7 @@
 
 > A light and easy to use feedback library for Angular 2. Its feature dedicated to store user's feedback. 
 
-# Setup
+## Setup
 
 Install library
 
@@ -10,9 +10,30 @@ Install library
 npm install --save angular2-feedback
 ```
 
-## Build
+Add Angular2FeedbackModule in to your AppModule or CoreModule.
+```shell
+import { Angular2FeedbackModule } from 'angular2-feedback';
 
-Run `ng build angular2-feedback` to build the project. The build artifacts will be stored in the `dist/` directory.
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    Angular2FeedbackModule
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Add the Angular2FeedbackComponent in to your AppComponent.
+
+```shell
+...
+template: `<angular2-feedback></angular2-feedback>`
+...
+```
 
 ## Publishing
 

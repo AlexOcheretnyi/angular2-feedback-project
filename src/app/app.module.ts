@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {Angular2FeedbackModule} from '../../projects/angular2-feedback/src/lib/angular2-feedback.module';
+
+import { Angular2FeedbackModule } from 'angular2-feedback';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,6 @@ import {Angular2FeedbackModule} from '../../projects/angular2-feedback/src/lib/a
     BrowserModule,
     Angular2FeedbackModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

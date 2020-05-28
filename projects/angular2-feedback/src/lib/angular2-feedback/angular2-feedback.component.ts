@@ -24,10 +24,10 @@ import { defaultFeedbackWidgetConfig } from '../../configs';
 
 @Component({
   selector: 'angular2-feedback',
-  templateUrl: './feedback-widget.component.html',
-  styleUrls: ['./feedback-widget.component.css']
+  templateUrl: './angular2-feedback.component.html',
+  styleUrls: ['./angular2-feedback.component.css']
 })
-export class FeedbackWidgetComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('feedbackBtn') feedbackButton: ElementRef<HTMLButtonElement>;
   @ViewChild('feedbackWidgetDialog', { read: ViewContainerRef }) feedbackDialog: ViewContainerRef;
 

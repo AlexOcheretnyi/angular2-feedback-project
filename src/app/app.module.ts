@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { Angular2FeedbackModule } from '../../projects/angular2-feedback/src/public-api';
+import { Angular2FeedbackModule } from 'angular2-feedback';
 
 @NgModule({
   declarations: [

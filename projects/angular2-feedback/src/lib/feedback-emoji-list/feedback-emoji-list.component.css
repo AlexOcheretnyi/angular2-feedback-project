@@ -126,23 +126,23 @@
 }
 
 .feedback-emoji--hate {
-  background: url(../../assets/svg/hate.svg) var(--emoji-bg);
+  background: url(svg/hate.svg) var(--emoji-bg);
 }
 
 .feedback-emoji--dislike {
-  background: url(../../assets/svg/sad.svg) var(--emoji-bg);
+  background: url(svg/sad.svg) var(--emoji-bg);
 }
 
 .feedback-emoji--neutral {
-  background: url(../../assets/svg/neutral.svg) var(--emoji-bg);
+  background: url(svg/neutral.svg) var(--emoji-bg);
 }
 
 .feedback-emoji--like {
-  background: url(../../assets/svg/like.svg) var(--emoji-bg);
+  background: url(svg/like.svg) var(--emoji-bg);
 }
 
 .feedback-emoji--love {
-  background: url(../../assets/svg/love.svg) var(--emoji-bg);
+  background: url(svg/love.svg) var(--emoji-bg);
 }
 
 /* animations */

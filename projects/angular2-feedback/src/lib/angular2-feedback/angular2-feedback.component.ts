@@ -8,7 +8,8 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  Renderer2, SimpleChanges,
+  Renderer2,
+  SimpleChanges,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -16,7 +17,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { EmojiName }                     from '../angular2-feedback.type';
-import { Angular2FeedbackService }         from '../angular2-feedback.service';
+import { Angular2FeedbackService }        from '../angular2-feedback.service';
 import { FeedbackWidgetDialogComponent } from '../feedback-widget-dialog/feedback-widget-dialog.component';
 
 import { FeedbackWidgetOptions }       from '../angular2-feedback.interface';
@@ -29,9 +30,9 @@ import { defaultFeedbackWidgetConfig } from '../../configs';
 })
 export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('feedbackBtn') feedbackButton: ElementRef<HTMLButtonElement>;
-  @ViewChild('feedbackWidgetDialog', { read: ViewContainerRef }) feedbackDialog: ViewContainerRef;
+  @ViewChild('feedbackWidgetDialog', { read: ViewContainerRef }) feedbackDialogViewContainerRef: ViewContainerRef;
 
-  @Input() feedbackEmojis: EmojiName[] =  ['hate', 'dislike', 'neutral', 'like', 'love'];
+  @Input() feedbackEmojiNames: EmojiName[] =  ['hate', 'dislike', 'neutral', 'like', 'love'];
   @Input() feedbackWidgetOptions: FeedbackWidgetOptions = defaultFeedbackWidgetConfig;
 
   @Output() feedbackStart: EventEmitter<void> = new EventEmitter<void>();
@@ -45,7 +46,7 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
   private feedbackOutputSubscription: Subscription = null;
 
   private onWidgetCloseCallback = () => {
-    this.feedbackDialog.clear();
+    this.feedbackDialogViewContainerRef.clear();
     this.renderer2.setStyle(this.feedbackButton.nativeElement, 'display', 'block');
     this.isButtonVisible = true;
     this.feedbackDialogClosed.emit();
@@ -71,6 +72,7 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   public onFeedbackStart(): void {
+    this.isFeedbackFinished = false;
     this._listenFeedbackWidgetClose();
     this._listenFeedbackOutput();
     this._listenFeedbackWidgetStart();
@@ -80,10 +82,7 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
     this.feedbackOutputSubscription = this._feedbackWidgetService.feedbackOutput$.subscribe(value => {
       this.feedbackOutput.next(value);
       this.isFeedbackFinished = true;
-
-      setTimeout(() => {
-        this.isFeedbackFinished = false;
-      }, 8000);
+      setTimeout(() => this.isFeedbackFinished = false, 8000);
     });
   }
 
@@ -105,15 +104,15 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
 
   private _initDialogComponent() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(FeedbackWidgetDialogComponent);
-    this.feedbackDialog.clear();
-    const componentRef = this.feedbackDialog.createComponent(componentFactory);
+    this.feedbackDialogViewContainerRef.clear();
+    const componentRef = this.feedbackDialogViewContainerRef.createComponent(componentFactory);
     const componentInstance =  (componentRef.instance as FeedbackWidgetDialogComponent);
     this._updatedComponentInputs(componentInstance);
   }
 
   private _updatedComponentInputs(componentInstance: FeedbackWidgetDialogComponent): void {
     componentInstance.feedbackDialogPosition = this.feedbackWidgetOptions.feedbackPosition;
-    componentInstance.feedbackEmojis = this.feedbackEmojis;
+    componentInstance.feedbackEmojis = this.feedbackEmojiNames;
     componentInstance.feedbackRateTitle = this.feedbackWidgetOptions.feedbackRateTitle;
     componentInstance.feedbackEmailTitle = this.feedbackWidgetOptions.feedbackEmailTitle;
     componentInstance.feedbackPlaceholder = this.feedbackWidgetOptions.feedbackPlaceholder;

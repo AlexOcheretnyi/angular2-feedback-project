@@ -25,16 +25,7 @@
 
 .fw-btn--right {
   right: -2px;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
-
-  -webkit-transform-origin: right bottom;
-  -moz-transform-origin: right bottom;
-  -o-transform-origin: right bottom;
-  -ms-transform-origin: right bottom;
   transform-origin: right bottom;
 }
 
@@ -44,17 +35,7 @@
 
 .fw-btn--left {
   left: -2px;
-
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg) ;
   transform: rotate(90deg);
-
-  -webkit-transform-origin: left bottom;
-  -moz-transform-origin: left bottom;
-  -o-transform-origin: left bottom;
-  -ms-transform-origin: left bottom;
   transform-origin: left bottom;
 }
 
@@ -85,11 +66,10 @@
   font-size: 20px;
 }
 
-.feedback-widget__feedback-success {
+.fw-success {
   position: fixed;
   z-index: 999;
   bottom: 260px;
-  right: 55px;
   width: 150px;
   padding: 8px;
   font-size: 14px;
@@ -97,14 +77,22 @@
   font-family: Arial, sans-serif;
   border-radius: 4px;
   background: #fff;
+}
+
+.fw-btn--right + .fw-success {
+  right: 55px;
   box-shadow: -1px 2px 6px 0 rgba(0, 0, 0, 0.3);
 }
 
-.feedback-widget__feedback-success::after {
+.fw-btn--left + .fw-success {
+  left: 55px;
+  box-shadow: 1px 2px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.fw-success::after {
   content: '';
   position: absolute;
   display: inline-block;
-  right: -10px;
   top: 25px;
   width: 0;
   height: 0;
@@ -112,21 +100,38 @@
   border-right: 8px solid transparent;
   border-bottom: 8px solid #fff;
   clear: both;
+}
+
+.fw-btn--right + .fw-success::after {
+  right: -10px;
   transform: rotate(90deg);
 }
 
-.feedback-widget__feedback-success:hover > .feedback-btn__feedback-success {
+.fw-btn--left + .fw-success::after {
+  left: -10px;
+  transform: rotate(-90deg);
+}
+
+.fw-btn--right + .fw-success > .fw-success__btn {
+  top: -7px;
+  left: -7px;
+}
+
+.fw-btn--left + .fw-success > .fw-success__btn {
+  top: -7px;
+  right: -7px;
+}
+
+.fw-success:hover > .fw-success__btn {
   opacity: 1;
 }
 
-.feedback-btn__feedback-success {
+.fw-success__btn {
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   width: 17px;
   height: 17px;
-  top: -7px;
-  right: -7px;
   background: #000;
   border-radius: 50%;
   outline: none;
@@ -134,11 +139,22 @@
   transition: opacity 200ms ease-out;
 }
 
-.feedback-btn__feedback-success::after {
-  content: '\00D7';
-  color: #fff;
+.fw-success__btn::after, .fw-success__btn::before {
   position: absolute;
-  font-size: 14px;
-  top: 0;
-  left: 4px;
+  content: '';
+  display: inline-block;
+  background: #fff;
+  width: 8px;
+  height: 2px;
+  border-radius: 4px;
+  left: 50%;
+  top: 50%;
+}
+
+.fw-success__btn::after {
+  transform: translateY(-50%) translateX(-50%) rotate(45deg);
+}
+
+.fw-success__btn::before {
+  transform:translateY(-50%) translateX(-50%) rotate(-45deg);
 }

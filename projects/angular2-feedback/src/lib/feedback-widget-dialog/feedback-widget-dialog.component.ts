@@ -68,7 +68,7 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
   private _initForm() {
    this.feedbackForm = this.fb.group({
      feedback: ['', Validators.required],
-     emoji: [null],
+     score: [null],
      screenshot: [null],
      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
    });

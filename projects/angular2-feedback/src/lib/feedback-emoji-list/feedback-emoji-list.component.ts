@@ -26,7 +26,7 @@ export class FeedbackEmojiListComponent extends CustomControlValueAccessor imple
   ngOnInit(): void {
   }
 
-  onEmojiChosen(emoji: EmojiName) {
-    this.value = emoji;
+  onEmojiChosen(emoji: EmojiName , index: number) {
+    this.value = index;
   }
 }

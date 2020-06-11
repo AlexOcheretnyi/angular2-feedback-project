@@ -9,15 +9,15 @@
       (click)="onFeedbackDialogClosed()"
     ></button>
     <p
-      *ngIf="!feedbackForm.get('emoji').value"
+      *ngIf="feedbackForm.get('score').value === null"
       class="feedback__title-intro"> {{ feedbackRateTitle }}
     </p>
     <feedback-emoji-list
       *ngIf="!isFeedbackSubmitted"
-      formControlName="emoji"
+      formControlName="score"
       [feedbackEmojis]="feedbackEmojis">
     </feedback-emoji-list>
-    <ng-container *ngIf="feedbackForm.get('emoji').value && !this.isFeedbackSubmitted">
+    <ng-container *ngIf="feedbackForm.get('score').value !== null && !this.isFeedbackSubmitted">
       <feedback-textarea [placeholder]="feedbackPlaceholder" formControlName="feedback"></feedback-textarea>
       <feedback-screenshot></feedback-screenshot>
       <div class="fw-flex--end-center feedback-submit__container">

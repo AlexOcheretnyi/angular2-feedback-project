@@ -3,7 +3,7 @@ import {FEEDBACK_EMAIL_TITLE, FEEDBACK_PLACEHOLDER, FEEDBACK_RATE_TITLE, FEEDBAC
 
 export const defaultFeedbackWidgetConfig: FeedbackWidgetOptions = {
   buttonText: 'Feedback',
-  buttonClass: 'feedback-btn__start',
+  buttonClass: 'fw-btn--start',
   buttonSize: 'medium',
   feedbackPosition: 'right',
   feedbackSuccessTitle:  FEEDBACK_SUCCESS_TITLE,

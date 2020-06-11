@@ -1,22 +1,30 @@
-.fw-fixed {
+.fw-btn {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: 0.1s all ease-in-out;
+  outline: none;
+}
+
+.fw-btn:hover {
+  box-shadow: rgba(0,0,0,0.3) 0 0 25px 1px;
+}
+
+.fw-btn:active {
+  box-shadow: rgba(0,0,0,0.5) 0 0 22px 1px;
+}
+
+.fw-btn--fixed {
   position: fixed;
   z-index: 999;
   bottom: 320px;
 }
 
-.fw-position--right {
+.fw-btn--right {
   right: -2px;
-}
-
-.fw-position--left {
-  left: -2px;
-}
-
-.fw-position--right > .fw-btn:hover {
-  margin-right: 2px;
-}
-
-.fw-position--right-rotate {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
@@ -30,7 +38,13 @@
   transform-origin: right bottom;
 }
 
-.fw-position--left-rotate {
+.fw-btn--right.fw-btn:hover {
+  margin-right: 2px;
+}
+
+.fw-btn--left {
+  left: -2px;
+
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
@@ -44,30 +58,16 @@
   transform-origin: left bottom;
 }
 
-.fw-position--left > .fw-btn:hover {
+.fw-btn--left.fw-btn:hover {
   margin-left: 2px;
 }
 
-.fw-btn {
+/* default button class */
+.fw-btn--start {
   padding: 10px 12px;
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
+  background-color: #0f1aff;
   border-radius: 8px 8px 0 0;
   box-shadow: rgba(0,0,0,0.2) 0 0 45px 1px;
-  transition: 0.1s all ease-in-out;
-  outline: none;
-}
-
-.fw-btn:hover {
-  box-shadow: rgba(0,0,0,0.3) 0 0 25px 1px;
-}
-
-.fw-btn:active {
-  box-shadow: rgba(0,0,0,0.5) 0 0 22px 1px;
-  filter: brightness(90%);
 }
 
 .fw-btn--small {
@@ -77,12 +77,12 @@
 
 .fw-btn--medium {
   padding: 10px 14px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .fw-btn--large {
   padding: 12px 16px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .feedback-widget__feedback-success {
@@ -141,9 +141,4 @@
   font-size: 14px;
   top: 0;
   left: 4px;
-}
-
-/* default button class */
-.feedback-btn__start {
-  background-color: #0f1aff;
 }

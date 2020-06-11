@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular2-feedback-project';
+
+  onFeedbackFinished($event) {
+    console.log($event);
+  }
 }

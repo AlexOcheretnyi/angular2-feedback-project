@@ -6,7 +6,6 @@ import { Angular2FeedbackService }     from '../angular2-feedback.service';
 
 import html2canvas from 'html2canvas';
 
-// @dynamic
 @Component({
   selector: 'feedback-widget-dialog',
   templateUrl: './feedback-widget-dialog.component.html',
@@ -26,6 +25,10 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
 
   public isFeedbackSubmitted: boolean = false;
 
+  get isFeedbackMainContainer(): boolean {
+    return this.feedbackForm.get('score').value !== null && !this.isFeedbackSubmitted;
+  }
+
   constructor(private fb: FormBuilder,
               private renderer2: Renderer2,
               private _feedbackWidgetService: Angular2FeedbackService) { }
@@ -44,7 +47,7 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
     this._feedbackWidgetService.feedbackWidgetClose();
   }
 
-  public onFeedbackSubmit() {
+  public onFeedbackSubmit(): void {
     const screenshotElem = this._feedbackWidgetService.getScreenshotElement;
     if (screenshotElem) { this._createElementScreenshot(screenshotElem); }
     this.isFeedbackSubmitted = true;
@@ -74,9 +77,9 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private _removeAriseClass() {
+  private _removeAriseClass(): void {
     setTimeout(() => {
-      this.renderer2.removeClass(this.feedbackDialog.nativeElement, 'feedback-dialog--arise');
+      this.renderer2.removeClass(this.feedbackDialog.nativeElement, 'fw-dialog--arise');
     }, 1500);
   }
 }

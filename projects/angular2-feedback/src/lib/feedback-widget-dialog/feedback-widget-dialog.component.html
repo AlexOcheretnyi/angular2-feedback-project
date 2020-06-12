@@ -9,7 +9,7 @@
       formControlName="score"
       [feedbackEmojis]="feedbackEmojiNames">
     </feedback-emoji-list>
-    <ng-container *ngIf="feedbackForm.get('score').value !== null && !this.isFeedbackSubmitted">
+    <ng-container *ngIf="isFeedbackMainContainer">
       <feedback-textarea [placeholder]="feedbackPlaceholder" formControlName="feedback"></feedback-textarea>
       <feedback-screenshot></feedback-screenshot>
       <div class="fw-dialog__submit-container">

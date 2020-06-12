@@ -4,7 +4,8 @@ import {
   ComponentFactoryResolver,
   ElementRef,
   EventEmitter,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
@@ -17,7 +18,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { EmojiName }                     from '../angular2-feedback.type';
-import { Angular2FeedbackService }        from '../angular2-feedback.service';
+import { Angular2FeedbackService }       from '../angular2-feedback.service';
 import { FeedbackWidgetDialogComponent } from '../feedback-widget-dialog/feedback-widget-dialog.component';
 
 import { FeedbackWidgetOptions }       from '../angular2-feedback.interface';
@@ -86,7 +87,7 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
     });
   }
 
-  private _removeListeners() {
+  private _removeListeners(): void {
     if (this.feedbackCloseSubscription) { this.feedbackCloseSubscription.unsubscribe(); }
     if (this.feedbackOutputSubscription) { this.feedbackOutputSubscription.unsubscribe(); }
   }
@@ -95,14 +96,14 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
     this.feedbackCloseSubscription = this._feedbackWidgetService.feedbackWidgetClosed$.subscribe(this.onWidgetCloseCallback.bind(this));
   }
 
-  private _listenFeedbackWidgetStart() {
+  private _listenFeedbackWidgetStart(): void {
     this.feedbackStart.emit();
     this._initDialogComponent();
     this.renderer2.setStyle(this.feedbackButton.nativeElement, 'display', 'none');
     this.isButtonVisible = false;
   }
 
-  private _initDialogComponent() {
+  private _initDialogComponent(): void {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(FeedbackWidgetDialogComponent);
     this.feedbackDialogViewContainerRef.clear();
     const componentRef = this.feedbackDialogViewContainerRef.createComponent(componentFactory);

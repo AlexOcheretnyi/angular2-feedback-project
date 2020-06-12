@@ -10,7 +10,7 @@ import {FeedbackWidgetDialogComponent} from './feedback-widget-dialog/feedback-w
 import {FeedbackEmojiListComponent}    from './feedback-emoji-list/feedback-emoji-list.component';
 import {FeedbackTextareaComponent}     from './feedback-textarea/feedback-textarea.component';
 import {Angular2FeedbackComponent} from './angular2-feedback/angular2-feedback.component';
-import { FirstLetterUppercasePipe } from './feedback-emoji-list/first-letter-uppercase.pipe';
+import { FirstLetterUppercasePipe } from '../shared/pipes/first-letter-uppercase.pipe';
 
 @NgModule({
   declarations: [

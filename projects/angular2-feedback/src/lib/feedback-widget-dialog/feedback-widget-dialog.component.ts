@@ -5,6 +5,7 @@ import { FeedbackPosition, FeedbackEmojiName } from '../angular2-feedback.type';
 import { Angular2FeedbackService }             from '../angular2-feedback.service';
 
 import html2canvas from 'html2canvas';
+import {HtmlTagsValidator} from '../../shared/validators/html-tags.validator';
 
 // @dynamic
 @Component({
@@ -60,10 +61,16 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
 
   private _initForm() {
     this.feedbackForm = this.fb.group({
-      feedback: ['', Validators.required],
+      feedback: ['', [Validators.required, HtmlTagsValidator]],
       score: [null],
       screenshot: [null],
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+      email: ['',
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+          HtmlTagsValidator
+        ]
+      ]
     });
   }
 

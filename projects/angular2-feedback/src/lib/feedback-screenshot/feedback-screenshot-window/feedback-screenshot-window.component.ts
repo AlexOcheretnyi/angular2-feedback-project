@@ -7,6 +7,7 @@ import { debounceTime, first, skip, tap, throttleTime } from 'rxjs/operators';
 import { BackdropPositions }       from '../../angular2-feedback.type';
 import { Angular2FeedbackService } from '../../angular2-feedback.service';
 
+// @dynamic
 @Component({
   selector: 'feedback-screenshot-window',
   templateUrl: './feedback-screenshot-window.component.html',

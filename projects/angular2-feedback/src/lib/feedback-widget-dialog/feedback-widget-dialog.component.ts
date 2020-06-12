@@ -2,10 +2,11 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 import { FormBuilder, FormGroup, Validators }                                                           from '@angular/forms';
 
 import { FeedbackPosition, FeedbackEmojiName } from '../angular2-feedback.type';
-import { Angular2FeedbackService }     from '../angular2-feedback.service';
+import { Angular2FeedbackService }             from '../angular2-feedback.service';
 
 import html2canvas from 'html2canvas';
 
+// @dynamic
 @Component({
   selector: 'feedback-widget-dialog',
   templateUrl: './feedback-widget-dialog.component.html',

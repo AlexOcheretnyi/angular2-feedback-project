@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 import { FeedbackScreenshotWindowComponent } from './feedback-screenshot-window/feedback-screenshot-window.component';
 import { Angular2FeedbackService }           from '../angular2-feedback.service';
 
+// @dynamic
 @Component({
   selector: 'feedback-screenshot',
   templateUrl: './feedback-screenshot.component.html',
@@ -37,7 +38,7 @@ export class FeedbackScreenshotComponent implements OnInit, OnDestroy {
       this.componentRef.instance.removeListeners();
       this.appRef.detachView(this.componentRef.hostView);
     }
-  };
+  }
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private appRef: ApplicationRef,

@@ -39,7 +39,7 @@ The options and events that can be used when working with feedback widget.
 
 ```shell
 <angular2-feedback 
-    [feedbackEmojis]="emojis"
+    [feedbackEmojiNames]="emojis"
     [feedbackWidgetOptions]="options"
     (feedbackStart)="onStart()"
     (feedbackDialogClosed)="onClose()"
@@ -52,7 +52,7 @@ The options and events that can be used when working with feedback widget.
    
    Option | Type | Default
    ------------- | ------------- | ------------- 
-   __feedbackEmojis__ | `Array<string>(5)` | `['hate', 'dislike', 'neutral', 'like', 'love']`
+   __feedbackEmojiNames__ | `Array<string>(5)` | `['hate', 'dislike', 'neutral', 'like', 'love']`
    __feedbackWidgetOptions__ | `FeedbackWidgetOptions` | `{ buttonText: 'Feedback', buttonClass: 'feedback-btn__start', buttonSize: 'medium', feedbackPosition: 'right', feedbackSuccessTitle:  FEEDBACK_SUCCESS_TITLE, feedbackRateTitle: FEEDBACK_RATE_TITLE, feedbackEmailTitle: FEEDBACK_EMAIL_TITLE, feedbackPlaceholder: FEEDBACK_PLACEHOLDER }`
  
    <br/>

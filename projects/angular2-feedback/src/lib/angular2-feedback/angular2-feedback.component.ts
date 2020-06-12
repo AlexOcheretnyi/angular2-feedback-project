@@ -112,7 +112,7 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
 
   private _updatedComponentInputs(componentInstance: FeedbackWidgetDialogComponent): void {
     componentInstance.feedbackDialogPosition = this.feedbackWidgetOptions.feedbackPosition;
-    componentInstance.feedbackEmojis = this.feedbackEmojiNames;
+    componentInstance.feedbackEmojiNames = this.feedbackEmojiNames;
     componentInstance.feedbackRateTitle = this.feedbackWidgetOptions.feedbackRateTitle;
     componentInstance.feedbackEmailTitle = this.feedbackWidgetOptions.feedbackEmailTitle;
     componentInstance.feedbackPlaceholder = this.feedbackWidgetOptions.feedbackPlaceholder;

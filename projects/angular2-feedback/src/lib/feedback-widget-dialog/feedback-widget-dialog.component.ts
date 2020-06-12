@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 import { FormBuilder, FormGroup, Validators }                                                           from '@angular/forms';
 
 import { FeedbackPosition, EmojiName } from '../angular2-feedback.type';
-import { Angular2FeedbackService }       from '../angular2-feedback.service';
+import { Angular2FeedbackService }     from '../angular2-feedback.service';
 
 import html2canvas from 'html2canvas';
 
@@ -16,7 +16,7 @@ import html2canvas from 'html2canvas';
 export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
   @ViewChild('feedbackDialog') feedbackDialog: ElementRef;
 
-  @Input() feedbackEmojis: EmojiName[];
+  @Input() feedbackEmojiNames: EmojiName[];
   @Input() feedbackDialogPosition: FeedbackPosition;
   @Input() feedbackRateTitle: string;
   @Input() feedbackEmailTitle: string;
@@ -54,6 +54,15 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
     this._feedbackWidgetService.feedbackWidgetClose();
   }
 
+  private _initForm() {
+    this.feedbackForm = this.fb.group({
+      feedback: ['', Validators.required],
+      score: [null],
+      screenshot: [null],
+      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+    });
+  }
+
   private _createElementScreenshot(screenshotElem: HTMLElement): void {
     html2canvas(screenshotElem).then(canvas => {
       canvas.toBlob((blob) => {
@@ -65,19 +74,9 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private _initForm() {
-   this.feedbackForm = this.fb.group({
-     feedback: ['', Validators.required],
-     score: [null],
-     screenshot: [null],
-     email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
-   });
-  }
-
   private _removeAriseClass() {
     setTimeout(() => {
       this.renderer2.removeClass(this.feedbackDialog.nativeElement, 'feedback-dialog--arise');
     }, 1500);
-
   }
 }

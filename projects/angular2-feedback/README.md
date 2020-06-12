@@ -10,7 +10,7 @@ Install library
 npm install --save angular2-feedback
 ```
 
-Add Angular2FeedbackModule in to your AppModule or CoreModule.
+Add Angular2FeedbackModule in to your feature module.
 ```shell
 import { Angular2FeedbackModule } from 'angular2-feedback';
 
@@ -54,20 +54,29 @@ The options and events that can be used when working with feedback widget.
    ------------- | ------------- | ------------- 
    __feedbackEmojis__ | `Array<string>(5)` | `['hate', 'dislike', 'neutral', 'like', 'love']`
    __feedbackWidgetOptions__ | `FeedbackWidgetOptions` | `{ buttonText: 'Feedback', buttonClass: 'feedback-btn__start', buttonSize: 'medium', feedbackPosition: 'right', feedbackSuccessTitle:  FEEDBACK_SUCCESS_TITLE, feedbackRateTitle: FEEDBACK_RATE_TITLE, feedbackEmailTitle: FEEDBACK_EMAIL_TITLE, feedbackPlaceholder: FEEDBACK_PLACEHOLDER }`
-   <br/>
-   
-   FeedbackWidgetOptions interface
    
    ```shell
     interface FeedbackWidgetOptions {
-      buttonSize?: ButtonSize;
-      feedbackPosition?: FeedbackPosition;
+      buttonSize?: 'small' | 'middle' | 'large';
+      feedbackPosition?: 'right' | 'left';
       buttonClass?: string;
       buttonText?: string;
       feedbackSuccessTitle?: string;
       feedbackRateTitle?: string;
       feedbackEmailTitle?: string;
       feedbackPlaceholder?: string;
+    }
+   ```
+
+## Output
+
+   ```shell
+    
+    interface FeedbackWidgetOutput {
+      email: string;
+      score: number;
+      screenshot: File;
+      feedback: string;
     }
    ```
   

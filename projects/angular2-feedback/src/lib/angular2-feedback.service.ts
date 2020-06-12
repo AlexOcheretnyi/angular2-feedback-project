@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
+import { FeedbackWidgetOutput } from './angular2-feedback.interface';
 
 @Injectable()
 export class Angular2FeedbackService {
 
-  private _feedbackWidgetClosed$: Subject<any> = new Subject<any>();
-  private _feedbackScreenshotCreated$: Subject<any> = new Subject<any>();
-  private _feedbackOutput$: Subject<any> = new Subject<any>();
+  private _feedbackWidgetClosed$: Subject<void> = new Subject<void>();
+  private _feedbackScreenshotCreated$: Subject<void> = new Subject<void>();
+  private _feedbackOutput$: Subject<FeedbackWidgetOutput> = new Subject<FeedbackWidgetOutput>();
 
-  public feedbackWidgetClosed$: Observable<any> = this._feedbackWidgetClosed$.asObservable();
-  public feedbackScreenshotCreated$: Observable<any> = this._feedbackScreenshotCreated$.asObservable();
-  public feedbackOutput$: Observable<any> = this._feedbackOutput$.asObservable();
+  public feedbackWidgetClosed$: Observable<void> = this._feedbackWidgetClosed$.asObservable();
+  public feedbackScreenshotCreated$: Observable<void> = this._feedbackScreenshotCreated$.asObservable();
+  public feedbackOutput$: Observable<FeedbackWidgetOutput> = this._feedbackOutput$.asObservable();
 
   private _screenshotElement: HTMLElement = null;
   private _widgetElement: HTMLElement = null;
@@ -22,7 +23,7 @@ export class Angular2FeedbackService {
 
   set setScreenshotElement(element: HTMLElement) { this._screenshotElement = element; }
 
-  set setFeedbackOutput(value: any) {
+  set setFeedbackOutput(value: FeedbackWidgetOutput) {
     this._feedbackOutput$.next(value);
   }
 

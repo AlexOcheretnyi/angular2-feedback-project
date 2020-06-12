@@ -25,7 +25,7 @@ import { Angular2FeedbackService }           from '../angular2-feedback.service'
   styleUrls: ['./feedback-screenshot.component.css']
 })
 export class FeedbackScreenshotComponent implements OnInit, OnDestroy {
-  @Input() screenshotHintText = 'Select an element on the page.';
+  @Input() screenshotHintText: string = 'Select an element on the page.';
 
   private componentRef: ComponentRef<FeedbackScreenshotWindowComponent>;
   private domInstance: HTMLElement = null;

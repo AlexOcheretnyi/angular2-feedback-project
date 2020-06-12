@@ -15,3 +15,10 @@ export interface FeedbackWidgetOptions {
   feedbackEmailTitle?: string;
   feedbackPlaceholder?: string;
 }
+
+export interface FeedbackWidgetOutput {
+  email: string;
+  score: number;
+  screenshot: File;
+  feedback: string;
+}

@@ -1,5 +1,6 @@
-import {FeedbackWidgetOptions} from '../lib/angular2-feedback.interface';
+import { FeedbackWidgetOptions } from '../lib/angular2-feedback.interface';
 import {FEEDBACK_EMAIL_TITLE, FEEDBACK_PLACEHOLDER, FEEDBACK_RATE_TITLE, FEEDBACK_SUCCESS_TITLE} from '../texts';
+import {EmojiNames} from '../lib/angular2-feedback.type';
 
 export const defaultFeedbackWidgetConfig: FeedbackWidgetOptions = {
   buttonText: 'Feedback',
@@ -11,3 +12,5 @@ export const defaultFeedbackWidgetConfig: FeedbackWidgetOptions = {
   feedbackEmailTitle: FEEDBACK_EMAIL_TITLE,
   feedbackPlaceholder: FEEDBACK_PLACEHOLDER
 };
+
+export const defaultEmojiNames: EmojiNames = ['very bad', 'dislike', 'neutral', 'like', 'very good'];

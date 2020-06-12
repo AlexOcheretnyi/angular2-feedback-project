@@ -10,13 +10,14 @@ import {
   OnInit
 } from '@angular/core';
 
-import { FeedbackScreenshotWindowComponent } from './feedback-screenshot-window/feedback-screenshot-window.component';
-import { Angular2FeedbackService }             from '../angular2-feedback.service';
 import { DOCUMENT } from '@angular/common';
-import { first } from 'rxjs/operators';
+
+import { first }        from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-// @dynamic
+import { FeedbackScreenshotWindowComponent } from './feedback-screenshot-window/feedback-screenshot-window.component';
+import { Angular2FeedbackService }           from '../angular2-feedback.service';
+
 @Component({
   selector: 'feedback-screenshot',
   templateUrl: './feedback-screenshot.component.html',

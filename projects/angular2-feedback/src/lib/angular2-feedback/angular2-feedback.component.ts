@@ -17,12 +17,12 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { EmojiName }                     from '../angular2-feedback.type';
+import { EmojiNames } from '../angular2-feedback.type';
 import { Angular2FeedbackService }       from '../angular2-feedback.service';
 import { FeedbackWidgetDialogComponent } from '../feedback-widget-dialog/feedback-widget-dialog.component';
 
-import { FeedbackWidgetOptions }       from '../angular2-feedback.interface';
-import { defaultFeedbackWidgetConfig } from '../../configs';
+import { FeedbackWidgetOptions }                          from '../angular2-feedback.interface';
+import { defaultEmojiNames, defaultFeedbackWidgetConfig } from '../../configs';
 
 @Component({
   selector: 'angular2-feedback',
@@ -33,7 +33,7 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
   @ViewChild('feedbackBtn') feedbackButton: ElementRef<HTMLButtonElement>;
   @ViewChild('feedbackWidgetDialog', { read: ViewContainerRef }) feedbackDialogViewContainerRef: ViewContainerRef;
 
-  @Input() feedbackEmojiNames: EmojiName[] =  ['hate', 'dislike', 'neutral', 'like', 'love'];
+  @Input() feedbackEmojiNames: EmojiNames =  defaultEmojiNames;
   @Input() feedbackWidgetOptions: FeedbackWidgetOptions = defaultFeedbackWidgetConfig;
 
   @Output() feedbackStart: EventEmitter<void> = new EventEmitter<void>();

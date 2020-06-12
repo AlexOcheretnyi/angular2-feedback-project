@@ -1,13 +1,15 @@
-<ul [ngClass]="{'feedback-emoji__list-intro': value === null}" class="feedback-emoji__list fw-flex--center">
+<ul [ngClass]="{'fw-emoji-list--intro': value === null}" class="fw-emoji-list">
   <li
-    *ngFor="let emoji of feedbackEmojis; let i = index"
-    class="fw-flex--center fw-flex--grow"
+    *ngFor="let emoji of feedbackEmojiList; let i = index"
+    class="fw-emoji-list__item"
   >
     <div
-      [ngClass]="{ 'feedback-emoji--active': value === i}"
-      class="feedback-emoji feedback-emoji--{{emoji}}"
-      (click)="onEmojiChosen(emoji, i)"
+      [ngClass]="{ 'fw-emoji--active': value === i}"
+      class="fw-emoji fw-emoji--{{emoji.emojiClass}}"
+      (click)="onEmojiChosen(i)"
     ></div>
-    <p *ngIf="value === null" class="feedback-emoji__label-intro">{{emoji | titlecase}}</p>
+    <p *ngIf="value === null" class="fw-emoji__label-intro">
+      {{ emoji.emojiName | firstLetterUppercase }}
+    </p>
   </li>
 </ul>

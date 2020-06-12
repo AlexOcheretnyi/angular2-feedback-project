@@ -7,7 +7,7 @@
     <feedback-emoji-list
       *ngIf="!isFeedbackSubmitted"
       formControlName="score"
-      [feedbackEmojis]="feedbackEmojiNames">
+      [feedbackEmojiNames]="feedbackEmojiNames">
     </feedback-emoji-list>
     <ng-container *ngIf="isFeedbackMainContainer">
       <feedback-textarea [placeholder]="feedbackPlaceholder" formControlName="feedback"></feedback-textarea>

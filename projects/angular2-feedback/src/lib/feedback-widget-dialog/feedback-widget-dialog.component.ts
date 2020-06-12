@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators }                                                           from '@angular/forms';
 
-import { FeedbackPosition, EmojiName } from '../angular2-feedback.type';
+import { FeedbackPosition, FeedbackEmojiName } from '../angular2-feedback.type';
 import { Angular2FeedbackService }     from '../angular2-feedback.service';
 
 import html2canvas from 'html2canvas';
@@ -15,7 +15,7 @@ import html2canvas from 'html2canvas';
 export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
   @ViewChild('feedbackDialog') feedbackDialog: ElementRef;
 
-  @Input() feedbackEmojiNames: EmojiName[];
+  @Input() feedbackEmojiNames: FeedbackEmojiName[];
   @Input() feedbackDialogPosition: FeedbackPosition;
   @Input() feedbackRateTitle: string;
   @Input() feedbackEmailTitle: string;

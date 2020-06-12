@@ -1,11 +1,12 @@
-import {AfterViewInit, Component, EventEmitter, Inject, OnInit, Output, Renderer2, ViewEncapsulation} from '@angular/core';
-import { Angular2FeedbackService } from '../../angular2-feedback.service';
-import {fromEvent, Subscription} from 'rxjs';
-import {debounceTime, first, skip, tap, throttleTime} from 'rxjs/operators';
-import {BackdropPositions} from '../../angular2-feedback.type';
-import {DOCUMENT, ViewportScroller} from '@angular/common';
+import { AfterViewInit, Component, EventEmitter, Inject, OnInit, Output, Renderer2, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT, ViewportScroller }                                                                   from '@angular/common';
 
-// @dynamic
+import { fromEvent, Subscription }                      from 'rxjs';
+import { debounceTime, first, skip, tap, throttleTime } from 'rxjs/operators';
+
+import { BackdropPositions }       from '../../angular2-feedback.type';
+import { Angular2FeedbackService } from '../../angular2-feedback.service';
+
 @Component({
   selector: 'feedback-screenshot-window',
   templateUrl: './feedback-screenshot-window.component.html',
@@ -30,7 +31,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
 
   private eventCallback = (event) => {
     const target = event.target as HTMLElement;
-    if (target.id === 'feedback-screenshot-window-close') { return; }
+    if (target.id === 'fw-screenshot-window-close') { return; }
     this._recalculateElementSizes(target);
   }
 
@@ -72,11 +73,11 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   }
 
   private _initShadowElements(): void {
-    this.windowRightShadow = document.querySelector('.feedback-screenshot__window__shade--right');
-    this.windowLeftShadow = document.querySelector('.feedback-screenshot__window__shade--left');
-    this.windowTopShadow = document.querySelector('.feedback-screenshot__window__shade--top');
-    this.windowBottomShadow = document.querySelector('.feedback-screenshot__window__shade--bottom');
-    this.windowContent = document.querySelector('.feedback-screenshot__window__content-highlighter');
+    this.windowRightShadow = document.querySelector('.fw-screenshot__window-shade--right');
+    this.windowLeftShadow = document.querySelector('.fw-screenshot__window-shade--left');
+    this.windowTopShadow = document.querySelector('.fw-screenshot__window-shade--top');
+    this.windowBottomShadow = document.querySelector('.fw-screenshot__window-shade--bottom');
+    this.windowContent = document.querySelector('.fw-screenshot__window-content-highlighter');
   }
 
    private _initEventListeners(): void {
@@ -88,7 +89,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
 
   private _initMouseOverSubscription(): void {
     this.windowMouseOverSubscription = fromEvent(window, 'mouseover')
-      .pipe(tap(event => this.renderer2.addClass(event.target, 'feedback-screenshot__elem--hover')), debounceTime(10))
+      .pipe(tap(event => this.renderer2.addClass(event.target, 'fw-screenshot__elem--hover')), debounceTime(10))
       .subscribe(this.eventCallback.bind(this));
   }
 
@@ -96,7 +97,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
     this.windowMouseOutSubscription = fromEvent(window, 'mouseout' )
       .subscribe((event) => {
         const target = event.target as HTMLElement;
-        this.renderer2.removeClass(target, 'feedback-screenshot__elem--hover');
+        this.renderer2.removeClass(target, 'fw-screenshot__elem--hover');
       });
   }
 

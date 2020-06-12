@@ -1,30 +1,30 @@
-<div class="feedback-screenshot__window">
-  <div *ngIf="!isElementSelected" class="feedback-screenshot__window__highlighter">
-    <div class="feedback-screenshot__window__highlight-line feedback-screenshot__window__highlight-line--right"></div>
-    <div class="feedback-screenshot__window__highlight-line feedback-screenshot__window__highlight-line--left"></div>
-    <div class="feedback-screenshot__window__highlight-line feedback-screenshot__window__highlight-line--top"></div>
-    <div class="feedback-screenshot__window__highlight-line feedback-screenshot__window__highlight-line--bottom"></div>
+<div class="fw-screenshot__window">
+  <div *ngIf="!isElementSelected" class="fw-screenshot__window-highlighter">
+    <div class="fw-screenshot__window-highlight-line fw-screenshot__window-highlight-line--right"></div>
+    <div class="fw-screenshot__window-highlight-line fw-screenshot__window-highlight-line--left"></div>
+    <div class="fw-screenshot__window-highlight-line fw-screenshot__window-highlight-line--top"></div>
+    <div class="fw-screenshot__window-highlight-line fw-screenshot__window-highlight-line--bottom"></div>
   </div>
 
-  <div *ngIf="!isElementSelected" class="feedback-screenshot__window__header">
+  <div *ngIf="!isElementSelected" class="fw-screenshot__window-header">
     <p> Select an element of the page. </p>
     <button
       id="feedback-screenshot-window-close"
-      class="feedback-screenshot__window-btn__close"
+      class="fw-screenshot__window-btn-close"
       (click)="onScreenshotWindowClose()">
 
     </button>
   </div>
-  <div class="feedback-screenshot__window__shade feedback-screenshot__window__shade--right"></div>
-  <div class="feedback-screenshot__window__shade feedback-screenshot__window__shade--top"></div>
-  <div class="feedback-screenshot__window__shade feedback-screenshot__window__shade--left"></div>
-  <div class="feedback-screenshot__window__shade feedback-screenshot__window__shade--bottom"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--right"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--top"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--left"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--bottom"></div>
   <div
-    [ngClass]="{'feedback-screenshot--selected': isElementSelected}"
-    class="feedback-screenshot__window__shade feedback-screenshot__window__content-highlighter"
+    [ngClass]="{'fw-screenshot--selected': isElementSelected}"
+    class="fw-screenshot__window-shade fw-screenshot__window-content-highlighter"
   >
-    <button *ngIf="isElementSelected" class="feedback-screenshot-btn__close" (click)="onScreenshotWindowClose()"></button>
-    <button *ngIf="isElementSelected" class="feedback-screenshot-btn__change" (click)="onScreenshotChange()"> Change </button>
+    <button *ngIf="isElementSelected" class="fw-screenshot__btn-close" (click)="onScreenshotWindowClose()"></button>
+    <button *ngIf="isElementSelected" class="fw-screenshot__btn-change" (click)="onScreenshotChange()"> Change </button>
 
   </div>
 </div>

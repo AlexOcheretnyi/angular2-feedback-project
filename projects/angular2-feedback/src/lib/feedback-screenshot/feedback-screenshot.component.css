@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.feedback-screenshot__btn {
+.fw-screenshot__btn {
   padding: 8px;
   margin: 10px;
   border: 2px dashed #000;
@@ -18,11 +18,11 @@
   outline: none;
 }
 
-.feedback-screenshot__btn:hover + .feedback-screenshot__hint {
+.fw-screenshot__btn:hover + .fw-screenshot__hint {
     opacity: 1;
 }
 
-.feedback-screenshot__hint {
+.fw-screenshot__hint {
   position: relative;
   margin-left: 10px;
   padding: 6px;
@@ -35,7 +35,7 @@
   transition: opacity 300ms ease-out;
 }
 
-.feedback-screenshot__hint::before {
+.fw-screenshot__hint::before {
   content: '';
   position: absolute;
   display: inline-block;

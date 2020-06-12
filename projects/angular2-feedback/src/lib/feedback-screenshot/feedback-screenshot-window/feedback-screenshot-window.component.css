@@ -1,4 +1,4 @@
-.feedback-screenshot__window {
+.fw-screenshot__window {
   box-sizing: border-box;
   width: 100% !important;
   height: auto;
@@ -15,13 +15,13 @@
   transition: opacity 1000ms;
 }
 
-.feedback-screenshot__window .feedback-screenshot__window__highlight-line,.feedback-screenshot__window__shade {
+.fw-screenshot__window .fw-screenshot__window-highlight-line,.fw-screenshot__window-shade {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.feedback-screenshot__window__header {
+.fw-screenshot__window-header {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -38,7 +38,7 @@
   border-radius: 0 0 5px 5px;
 }
 
-.feedback-screenshot__window-btn__close {
+.fw-screenshot__window-btn-close {
   outline: none;
   cursor: pointer;
   position: relative;
@@ -51,11 +51,11 @@
   transition: background-color 100ms ease-in-out;
 }
 
-.feedback-screenshot__window-btn__close:hover {
+.fw-screenshot__window-btn-close:hover {
   background: rgba(165, 165, 165, 0.51);
 }
 
-.feedback-screenshot__window-btn__close:after {
+.fw-screenshot__window-btn-close:after {
   content:'\00D7';
   font-size: 20px;
   color: rgba(47, 47, 47, 0.7);
@@ -64,11 +64,11 @@
   left: 2px;
 }
 
-.feedback-screenshot__elem--hover {
+.fw-screenshot__elem--hover {
   cursor: pointer;
 }
 
-.feedback-screenshot__window__highlighter {
+.fw-screenshot__window-highlighter {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -80,66 +80,66 @@
   pointer-events: none;
 }
 
-.feedback-screenshot__window__highlight-line {
+.fw-screenshot__window-highlight-line {
   position: absolute;
   background: salmon;
 }
 
-.feedback-screenshot__window__highlight-line--right {
+.fw-screenshot__window-highlight-line--right {
   top: 0;
   right: 0;
   width: 4px;
   height: 100%;
 }
 
-.feedback-screenshot__window__highlight-line--left {
+.fw-screenshot__window-highlight-line--left {
   top: 0;
   left: 0;
   width: 4px;
   height: 100%;
 }
 
-.feedback-screenshot__window__highlight-line--top {
+.fw-screenshot__window-highlight-line--top {
   top: 0;
   left: 0;
   height: 4px;
   width: 100%;
 }
 
-.feedback-screenshot__window__highlight-line--bottom {
+.fw-screenshot__window-highlight-line--bottom {
   bottom: 0;
   left: 0;
   height: 4px;
   width: 100%;
 }
 
-.feedback-screenshot__window__shade {
+.fw-screenshot__window-shade {
   position: fixed;
   background: rgba(0, 0, 0, 0.4);
   z-index: -1;
 }
 
-.feedback-screenshot__window__shade--right {
+.fw-screenshot__window-shade--right {
   bottom: 0;
   right: 0;
 }
 
-.feedback-screenshot__window__shade--left {
+.fw-screenshot__window-shade--left {
   left: 0;
   bottom: 0;
 }
 
-.feedback-screenshot__window__shade--top {
+.fw-screenshot__window-shade--top {
   top: 0;
   right: 0;
   left: 0;
 }
 
-.feedback-screenshot__window__shade--bottom {
+.fw-screenshot__window-shade--bottom {
   bottom: 0;
 }
 
-.feedback-screenshot__window__content-highlighter {
+.fw-screenshot__window-content-highlighter {
   position: relative;
   box-sizing: initial !important;
   background-color: transparent;
@@ -151,12 +151,12 @@
   transition: outline-color ease-out 400ms;
 }
 
-.feedback-screenshot--selected {
+.fw-screenshot--selected {
   outline-style: solid;
   outline-color: red;
 }
 
-.feedback-screenshot-btn__close {
+.fw-screenshot__btn-close {
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -170,7 +170,7 @@
   outline: none;
 }
 
-.feedback-screenshot-btn__close:after {
+.fw-screenshot__btn-close:after {
   position: absolute;
   content: '\00D7';
   font-size: 20px;
@@ -179,7 +179,7 @@
   color: #fff;
 }
 
-.feedback-screenshot-btn__change {
+.fw-screenshot__btn-change {
   padding: 10px;
   border-radius: 0 0 4px 4px;
   background-color: red;

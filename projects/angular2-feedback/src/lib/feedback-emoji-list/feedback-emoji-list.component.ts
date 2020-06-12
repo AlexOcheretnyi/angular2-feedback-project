@@ -1,8 +1,9 @@
-import {Component, forwardRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR }                    from '@angular/forms';
 
-import {CustomControlValueAccessor} from '../../shared/custom-control-value-accessor';
-import {EmojiName} from '../angular2-feedback.type';
+import { CustomControlValueAccessor } from '../../shared/custom-control-value-accessor';
+import { EmojiNames }                 from '../angular2-feedback.type';
+import { defaultEmojiNames }          from '../../configs';
 
 @Component({
   selector: 'feedback-emoji-list',
@@ -16,17 +17,27 @@ import {EmojiName} from '../angular2-feedback.type';
     }
   ]
 })
-export class FeedbackEmojiListComponent extends CustomControlValueAccessor implements OnInit {
-  @Input() feedbackEmojis: EmojiName[];
+export class FeedbackEmojiListComponent extends CustomControlValueAccessor implements OnInit{
+  @Input() feedbackEmojiNames: EmojiNames;
+
+  public feedbackEmojiList: { emojiName: string, emojiClass: string}[];
 
   constructor() {
     super();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this._updateEmojiList();
   }
 
-  onEmojiChosen(emoji: EmojiName , index: number) {
+   public onEmojiChosen(index: number): void {
     this.value = index;
+  }
+
+  private _updateEmojiList() {
+    this.feedbackEmojiList = this.feedbackEmojiNames.map((elem, i) => {
+      const defaultEmojiName = defaultEmojiNames[i].replace(' ', '-');
+      return { emojiName: elem, emojiClass: defaultEmojiName };
+    });
   }
 }

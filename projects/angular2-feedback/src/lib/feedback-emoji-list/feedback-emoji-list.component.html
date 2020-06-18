@@ -4,9 +4,9 @@
     class="fw-emoji-list__item"
   >
     <div
-      [ngClass]="{ 'fw-emoji--active': value === i}"
+      [ngClass]="{ 'fw-emoji--active': value === i + 1}"
       class="fw-emoji fw-emoji--{{emoji.emojiClass}}"
-      (click)="onEmojiChosen(i)"
+      (click)="onEmojiChosen(i + 1)"
     ></div>
     <p *ngIf="value === null" class="fw-emoji__label-intro">
       {{ emoji.emojiName | firstLetterUppercase }}

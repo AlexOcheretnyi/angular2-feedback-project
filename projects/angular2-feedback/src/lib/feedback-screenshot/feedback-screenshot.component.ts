@@ -3,11 +3,15 @@ import {
   Component,
   ComponentFactoryResolver,
   ComponentRef,
+  ElementRef,
   EmbeddedViewRef,
   Inject,
-  Injector, Input,
+  Injector,
+  Input,
   OnDestroy,
-  OnInit
+  OnInit,
+  Renderer2,
+  ViewChild
 } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
@@ -25,7 +29,8 @@ import { Angular2FeedbackService }           from '../angular2-feedback.service'
   styleUrls: ['./feedback-screenshot.component.css']
 })
 export class FeedbackScreenshotComponent implements OnInit, OnDestroy {
-  @Input() screenshotHintText: string = 'Select an element on the page.';
+  @ViewChild('selectElementHint', { static: true }) selectElementHint: ElementRef;
+  @Input() screenshotHintText: string = 'Click to select an element on the page.';
 
   private componentRef: ComponentRef<FeedbackScreenshotWindowComponent>;
   private domInstance: HTMLElement = null;
@@ -43,11 +48,14 @@ export class FeedbackScreenshotComponent implements OnInit, OnDestroy {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private appRef: ApplicationRef,
               private injector: Injector,
+              private renderer2: Renderer2,
               private _feedbackService: Angular2FeedbackService,
               @Inject(DOCUMENT) private document: Document) { }
+
   ngOnInit() {
     this._listenFeedbackWidgetClose();
     this._listenFeedbackScreenshotCreate();
+    this._removeHintFirstLoadedClass();
   }
 
   public onClick() {
@@ -82,6 +90,13 @@ export class FeedbackScreenshotComponent implements OnInit, OnDestroy {
     componentRef.instance.screenshotWindowClosed$.pipe(first()).subscribe(() => {
       this.appRef.detachView(componentRef.hostView);
     });
+  }
+
+  private _removeHintFirstLoadedClass() {
+    setTimeout(() =>
+        this.renderer2.removeClass(this.selectElementHint.nativeElement, 'fw-screenshot__hint--first-loaded'),
+      1000
+    );
   }
 
   ngOnDestroy() {

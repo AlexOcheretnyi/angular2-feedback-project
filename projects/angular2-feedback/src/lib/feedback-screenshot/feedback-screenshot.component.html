@@ -1,4 +1,9 @@
-<button class="fw-screenshot__btn" (click)="onClick()"></button>
-<div class="fw-screenshot__hint">
-  {{ screenshotHintText }}
-</div>
+<button class="fw-screenshot__btn" (click)="onClick()">
+  <span
+    #selectElementHint
+    class="fw-screenshot__hint fw-screenshot__hint--first-loaded"
+  >
+    {{ screenshotHintText }}
+  </span>
+</button>
+

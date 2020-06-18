@@ -10,6 +10,7 @@
 }
 
 .fw-screenshot__btn {
+  position: relative;
   padding: 8px;
   margin: 10px;
   border: 2px dashed #000;
@@ -18,13 +19,27 @@
   outline: none;
 }
 
-.fw-screenshot__btn:hover + .fw-screenshot__hint {
+.fw-screenshot__btn::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' %3E%3Cpath d='M6 0l14.36 13.45-5.868.53-1.062.098.441.973 3.559 7.797L14.805 24l-3.395-7.879-.426-.992-.789.738-4.168 3.91L6 0'/%3E%3C/svg%3E") no-repeat;
+  transform: rotate(-15deg);
+}
+
+.fw-screenshot__btn:hover .fw-screenshot__hint {
     opacity: 1;
 }
 
 .fw-screenshot__hint {
-  position: relative;
+  pointer-events: none;
+  position: absolute;
+  left: 21px;
+  bottom: -2px;
   margin-left: 10px;
+  min-width: 145px;
   padding: 6px;
   border-radius: 4px;
   color: white;
@@ -35,12 +50,16 @@
   transition: opacity 300ms ease-out;
 }
 
+.fw-screenshot__hint--first-loaded {
+  opacity: 1;
+}
+
 .fw-screenshot__hint::before {
   content: '';
   position: absolute;
   display: inline-block;
   left: -7px;
-  top: 10px;
+  top: 25px;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;

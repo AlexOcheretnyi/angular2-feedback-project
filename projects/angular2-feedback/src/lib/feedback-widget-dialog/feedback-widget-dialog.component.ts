@@ -44,7 +44,7 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
   }
 
   public onSubmit(isEmail: boolean): void {
-    if (!isEmail) { this.feedbackForm.patchValue({email: null}); }
+    if (!isEmail) { this.feedbackForm.patchValue({email: ''}); }
     this._feedbackWidgetService.setFeedbackOutput = this.feedbackForm.value;
     this._feedbackWidgetService.feedbackWidgetClose();
   }

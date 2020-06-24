@@ -1,6 +1,6 @@
 # Angular2-Feedback
 
-> A light and easy to use feedback library for Angular 2. Its feature dedicated to store user's feedback. 
+> angular2-feedback is an Angular library for collecting users feedbacks with ability to create page element screenshot. The user will be able to set rate experience, add feedback, select an element on the page to create a screenshot and leave users email  
 
 ## Setup
 

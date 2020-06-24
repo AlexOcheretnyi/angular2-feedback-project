@@ -15,10 +15,6 @@
 
     </button>
   </div>
-  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--right"></div>
-  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--top"></div>
-  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--left"></div>
-  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--bottom"></div>
   <div
     [ngClass]="{'fw-screenshot--selected': isElementSelected}"
     class="fw-screenshot__window-shade fw-screenshot__window-content-highlighter"
@@ -27,4 +23,8 @@
     <button *ngIf="isElementSelected" class="fw-screenshot__btn-change" (click)="onScreenshotChange()"> Change </button>
 
   </div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--right"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--top"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--left"></div>
+  <div class="fw-screenshot__window-shade fw-screenshot__window-shade--bottom"></div>
 </div>

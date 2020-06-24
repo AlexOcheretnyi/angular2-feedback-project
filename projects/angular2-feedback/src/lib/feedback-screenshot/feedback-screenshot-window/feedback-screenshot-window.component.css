@@ -149,11 +149,18 @@
   display: block;
   border-radius: 3px;
   transition: outline-color ease-out 400ms;
+  z-index: 1;
 }
 
 .fw-screenshot--selected {
   outline-style: solid;
   outline-color: red;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.fw-screenshot--selected ~ .fw-screenshot__window-shade {
+  pointer-events: auto;
 }
 
 .fw-screenshot__btn-close {
@@ -188,7 +195,7 @@
   border: none;
   pointer-events: all;
   right: -4px;
-  bottom: -33px;
+  bottom: -35px;
   cursor: pointer;
   outline: none;
 }

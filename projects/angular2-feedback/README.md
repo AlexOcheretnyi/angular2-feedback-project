@@ -52,7 +52,7 @@ The options and events that can be used when working with feedback widget.
    
    Option | Type | Default
    ------------- | ------------- | ------------- 
-   __feedbackEmojiNames__ | `Array<string>(5)` | `['hate', 'dislike', 'neutral', 'like', 'love']`
+   __feedbackEmojiNames__ | `Array<string>(5)` | `['very bad', 'dislike', 'neutral', 'like', 'very good']`
    __feedbackWidgetOptions__ | `FeedbackWidgetOptions` | `{ buttonText: 'Feedback', buttonClass: 'feedback-btn__start', buttonSize: 'medium', feedbackPosition: 'right', feedbackSuccessTitle:  FEEDBACK_SUCCESS_TITLE, feedbackRateTitle: FEEDBACK_RATE_TITLE, feedbackEmailTitle: FEEDBACK_EMAIL_TITLE, feedbackPlaceholder: FEEDBACK_PLACEHOLDER }`
  
    <br/>

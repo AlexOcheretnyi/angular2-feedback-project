@@ -8,8 +8,10 @@
   >
     {{ feedbackWidgetOptions.buttonText }}
   </button>
+
   <div *ngIf="isFeedbackFinished" class="fw-success">
-    <button class="fw-success__btn" type="button" (click)="this.isFeedbackFinished = false"></button>
+    <button class="fw-btn fw-btn__success-close" type="button" (click)="onSuccessPopupClose()"></button>
     <span> {{ feedbackWidgetOptions.feedbackSuccessTitle }} </span>
   </div>
+
   <ng-template #feedbackWidgetDialog></ng-template>

@@ -112,21 +112,21 @@
   transform: rotate(-90deg);
 }
 
-.fw-btn--right + .fw-success > .fw-success__btn {
+.fw-btn--right + .fw-success > .fw-btn__success-close {
   top: -7px;
   left: -7px;
 }
 
-.fw-btn--left + .fw-success > .fw-success__btn {
+.fw-btn--left + .fw-success > .fw-btn__success-close {
   top: -7px;
   right: -7px;
 }
 
-.fw-success:hover > .fw-success__btn {
+.fw-success:hover > .fw-btn__success-close {
   opacity: 1;
 }
 
-.fw-success__btn {
+.fw-btn__success-close {
   cursor: pointer;
   opacity: 0;
   position: absolute;
@@ -135,11 +135,12 @@
   background: #000;
   border-radius: 50%;
   outline: none;
+  padding: 0;
   border: none;
   transition: opacity 200ms ease-out;
 }
 
-.fw-success__btn::after, .fw-success__btn::before {
+.fw-btn__success-close::after, .fw-btn__success-close::before {
   position: absolute;
   content: '';
   display: inline-block;
@@ -151,10 +152,10 @@
   top: 50%;
 }
 
-.fw-success__btn::after {
+.fw-btn__success-close::after {
   transform: translateY(-50%) translateX(-50%) rotate(45deg);
 }
 
-.fw-success__btn::before {
+.fw-btn__success-close::before {
   transform:translateY(-50%) translateX(-50%) rotate(-45deg);
 }

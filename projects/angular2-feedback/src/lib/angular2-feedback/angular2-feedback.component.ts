@@ -65,6 +65,10 @@ export class Angular2FeedbackComponent implements OnInit, AfterViewInit, OnDestr
     this._feedbackWidgetService.setWidgetElement = this.elRef.nativeElement;
   }
 
+  public onSuccessPopupClose() {
+    this.isFeedbackFinished = false;
+  }
+
   public onFeedbackStart(): void {
     this.isFeedbackFinished = false;
     this._listenFeedbackWidgetClose();

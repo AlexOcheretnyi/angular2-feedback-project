@@ -33,4 +33,4 @@ import { FirstLetterUppercasePipe } from '../shared/pipes/first-letter-uppercase
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [Angular2FeedbackComponent]
 })
-export class Angular2FeedbackModule { }
+export class Angular2FeedbackModule {}

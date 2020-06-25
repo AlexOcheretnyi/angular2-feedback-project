@@ -127,7 +127,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
       .pipe(
         map((event) => {
           event.preventDefault();
-          event.stopImmediatePropagation();
+          event.stopPropagation();
         }),
         skip(1),
         first()

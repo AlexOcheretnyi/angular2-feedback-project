@@ -125,10 +125,9 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   private _initClickSubscription() {
     this.windowClickSubscription = fromEvent(window, 'click')
       .pipe(
-        skip(1),
-        first(),
+        first(event => (event.target as HTMLElement).id !== 'fw-screenshot-button'),
         map((event) => event.preventDefault()),
-        switchMap(() => interval(10))
+        switchMap(() => interval(5))
       )
       .subscribe(() => {
         this.removeListeners();

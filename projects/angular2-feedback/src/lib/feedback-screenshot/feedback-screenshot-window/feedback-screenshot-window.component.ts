@@ -1,8 +1,19 @@
-import { AfterViewInit, Component, EventEmitter, Inject, OnInit, Output, Renderer2, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { DOCUMENT, ViewportScroller }                                                                   from '@angular/common';
 
 import {fromEvent, interval, Subscription} from 'rxjs';
-import {debounceTime, first, map, skip, switchMap, tap, throttleTime} from 'rxjs/operators';
+import {debounceTime, delay, first, map, skip, switchMap, tap, throttleTime} from 'rxjs/operators';
 
 import { BackdropPositions }       from '../../angular2-feedback.type';
 import { Angular2FeedbackService } from '../../angular2-feedback.service';
@@ -16,8 +27,10 @@ import { Angular2FeedbackService } from '../../angular2-feedback.service';
 })
 export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit {
   @Output() screenshotWindowClosed$: EventEmitter<void> = new EventEmitter<void>();
+  @ViewChild('contentHighlighter', { static: true }) contentHighlighter: ElementRef<HTMLElement>;
 
   public isElementSelected = false;
+  public isElementHovered = false;
   public selectedElement: HTMLElement;
 
   private windowMouseOverSubscription: Subscription;
@@ -25,6 +38,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   private windowClickSubscription: Subscription;
   private windowWheelSubscription: Subscription;
   private windowScrollSubscription: Subscription;
+  private windowMouseMoveSubscription: Subscription;
 
   private windowRightShadow: HTMLElement;
   private windowLeftShadow: HTMLElement;
@@ -34,8 +48,8 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
 
   private eventCallback = (event) => {
     const target = event.target as HTMLElement;
-    if (target.id === 'fw-screenshot-window-close') { return; }
     this.selectedElement = target;
+    if (target.id === 'fw-screenshot-window-close') { return; }
     this._recalculateElementSizes(target);
   }
 
@@ -74,6 +88,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
     if (this.windowMouseOverSubscription) { this.windowMouseOverSubscription.unsubscribe(); }
     if (this.windowWheelSubscription) { this.windowWheelSubscription.unsubscribe(); }
     if (this.windowScrollSubscription) { this.windowScrollSubscription.unsubscribe(); }
+    if (this.windowMouseMoveSubscription) {this.windowMouseMoveSubscription.unsubscribe(); }
   }
 
   private _initShadowElements(): void {
@@ -87,28 +102,34 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
    private _initEventListeners(): void {
     this._initMouseOverSubscription();
     this._initMouseOutSubscription();
-    this._initWheelSubscription();
     this._initClickSubscription();
+    this._initMouseMoveSubscription();
+  }
+
+  private _initMouseMoveSubscription() {
+    this.windowMouseMoveSubscription = fromEvent(window, 'mousemove')
+      .pipe(throttleTime(50))
+      .subscribe((event) => {
+          this.renderer2.setStyle(this.contentHighlighter.nativeElement, 'pointer-events', 'none');
+          setTimeout(() => {
+            this.renderer2.setStyle(this.contentHighlighter.nativeElement, 'pointer-events', 'auto');
+          }, 5);
+      });
   }
 
   private _initMouseOverSubscription(): void {
     this.windowMouseOverSubscription = fromEvent(window, 'mouseover')
-      .pipe(tap(event => this.renderer2.addClass(event.target, 'fw-screenshot__elem--hover')), debounceTime(10))
+      .pipe(tap(event => this.renderer2.addClass(event.target, 'fw-screenshot__elem--hover')), throttleTime(10))
       .subscribe(this.eventCallback.bind(this));
   }
 
   private _initMouseOutSubscription(): void {
     this.windowMouseOutSubscription = fromEvent(window, 'mouseout' )
+      .pipe(throttleTime(10))
       .subscribe((event) => {
         const target = event.target as HTMLElement;
         this.renderer2.removeClass(target, 'fw-screenshot__elem--hover');
       });
-  }
-
-  private _initWheelSubscription() {
-    this.windowWheelSubscription = fromEvent(window, 'wheel')
-      .pipe(throttleTime(10))
-      .subscribe(this.eventCallback.bind(this));
   }
 
   private _initScrollSubscription(): void {
@@ -124,15 +145,9 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
 
   private _initClickSubscription() {
     this.windowClickSubscription = fromEvent(window, 'click')
-      .pipe(
-        map((event) => {
-          event.preventDefault();
-          event.stopPropagation();
-        }),
-        skip(1),
-        first()
-      )
-      .subscribe(() => {
+      .pipe(skip(1), first())
+      .subscribe((event) => {
+        event.preventDefault();
         this.removeListeners();
         this.feedbackService.setScreenshotElement = this.selectedElement;
         this._initScrollSubscription();
@@ -144,11 +159,11 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
 
   private _recalculateElementSizes(target: HTMLElement) {
     const targetPositions: ClientRect = target.getBoundingClientRect();
+    this._updateElementSize(this.windowContent, targetPositions, 'center');
     this._updateElementSize(this.windowTopShadow, targetPositions, 'top');
     this._updateElementSize(this.windowLeftShadow, targetPositions, 'left');
     this._updateElementSize(this.windowRightShadow, targetPositions, 'right');
     this._updateElementSize(this.windowBottomShadow, targetPositions, 'bottom');
-    this._updateElementSize(this.windowContent, targetPositions, 'center');
   }
 
   private _updateElementSize(target: HTMLElement, targetPositions: ClientRect, side: BackdropPositions): void {

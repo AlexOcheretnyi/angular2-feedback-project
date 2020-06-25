@@ -10,10 +10,10 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { DOCUMENT, ViewportScroller }                                                                   from '@angular/common';
+import { DOCUMENT, ViewportScroller }  from '@angular/common';
 
-import {fromEvent, interval, Subscription} from 'rxjs';
-import {debounceTime, delay, first, map, skip, switchMap, tap, throttleTime} from 'rxjs/operators';
+import {fromEvent, Subscription} from 'rxjs';
+import {debounceTime, first, skip, tap, throttleTime} from 'rxjs/operators';
 
 import { BackdropPositions }       from '../../angular2-feedback.type';
 import { Angular2FeedbackService } from '../../angular2-feedback.service';
@@ -30,7 +30,6 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   @ViewChild('contentHighlighter', { static: true }) contentHighlighter: ElementRef<HTMLElement>;
 
   public isElementSelected = false;
-  public isElementHovered = false;
   public selectedElement: HTMLElement;
 
   private windowMouseOverSubscription: Subscription;
@@ -48,7 +47,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
 
   private eventCallback = (event) => {
     const target = event.target as HTMLElement;
-    this.selectedElement = target;
+    if (!target.classList.contains('fw-screenshot__window-content-highlighter')) {this.selectedElement = target;}
     if (target.id === 'fw-screenshot-window-close') { return; }
     this._recalculateElementSizes(target);
   }

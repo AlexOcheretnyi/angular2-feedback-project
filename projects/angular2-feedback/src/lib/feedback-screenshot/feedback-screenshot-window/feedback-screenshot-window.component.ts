@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Inject, OnInit, Output, Renderer2, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT, ViewportScroller }                                                                   from '@angular/common';
 
-import { fromEvent, Subscription }                      from 'rxjs';
-import {debounceTime, first, map, skip, tap, throttleTime} from 'rxjs/operators';
+import {fromEvent, interval, Subscription} from 'rxjs';
+import {debounceTime, first, map, skip, switchMap, tap, throttleTime} from 'rxjs/operators';
 
 import { BackdropPositions }       from '../../angular2-feedback.type';
 import { Angular2FeedbackService } from '../../angular2-feedback.service';
@@ -127,7 +127,8 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
       .pipe(
         skip(1),
         first(),
-        map((event) => event.preventDefault())
+        map((event) => event.preventDefault()),
+        switchMap(() => interval(10))
       )
       .subscribe(() => {
         this.removeListeners();

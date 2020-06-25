@@ -11,7 +11,7 @@ import { Angular2FeedbackModule } from 'projects/angular2-feedback/src/public-ap
   ],
   imports: [
     BrowserModule,
-    Angular2FeedbackModule
+    Angular2FeedbackModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

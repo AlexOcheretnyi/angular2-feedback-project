@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { FeedbackWidgetOutput } from './angular2-feedback.interface';
+import {FeedbackWidgetOptions, FeedbackWidgetOutput} from './angular2-feedback.interface';
+import {FEEDBACK_CONFIG} from '../const';
 
 @Injectable()
 export class Angular2FeedbackService {
@@ -17,7 +18,7 @@ export class Angular2FeedbackService {
   private _screenshotElement: HTMLElement = null;
   private _widgetElement: HTMLElement = null;
 
-  constructor() { }
+  constructor(@Inject(FEEDBACK_CONFIG) @Optional() public readonly feedbackConfig: FeedbackWidgetOptions) { }
 
   set setWidgetElement(element: HTMLElement) { this._widgetElement = element; }
 

@@ -4,13 +4,10 @@ import {
   ComponentFactoryResolver,
   ElementRef,
   EventEmitter,
-  Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
   Renderer2,
-  SimpleChanges,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -21,20 +18,19 @@ import { EmojiNames } from '../angular2-feedback.type';
 import { Angular2FeedbackService }       from '../angular2-feedback.service';
 import { FeedbackWidgetDialogComponent } from '../feedback-widget-dialog/feedback-widget-dialog.component';
 
-import { FeedbackWidgetOptions }                          from '../angular2-feedback.interface';
-import { defaultEmojiNames, defaultFeedbackWidgetConfig } from '../../configs';
+import { FeedbackWidgetOptions } from '../angular2-feedback.interface';
 
 @Component({
   selector: 'angular2-feedback',
   templateUrl: './angular2-feedback.component.html',
   styleUrls: ['./angular2-feedback.component.css']
 })
-export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class Angular2FeedbackComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('feedbackBtn') feedbackButton: ElementRef<HTMLButtonElement>;
   @ViewChild('feedbackWidgetDialog', { read: ViewContainerRef }) feedbackDialogViewContainerRef: ViewContainerRef;
 
-  @Input() feedbackEmojiNames: EmojiNames =  defaultEmojiNames;
-  @Input() feedbackWidgetOptions: FeedbackWidgetOptions = defaultFeedbackWidgetConfig;
+  public feedbackEmojiNames: EmojiNames;
+  public feedbackWidgetOptions: FeedbackWidgetOptions;
 
   @Output() feedbackStart: EventEmitter<void> = new EventEmitter<void>();
   @Output() feedbackDialogClosed: EventEmitter<void> = new EventEmitter<void>();
@@ -57,19 +53,16 @@ export class Angular2FeedbackComponent implements OnInit, OnChanges, AfterViewIn
   constructor(private renderer2: Renderer2,
               private _feedbackWidgetService: Angular2FeedbackService,
               private elRef: ElementRef,
-              private componentFactoryResolver: ComponentFactoryResolver) { }
+              private componentFactoryResolver: ComponentFactoryResolver) {
+    this.feedbackWidgetOptions = this._feedbackWidgetService.feedbackConfig;
+    this.feedbackEmojiNames = this.feedbackWidgetOptions.emojiNames;
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngAfterViewInit(): void {
     this._feedbackWidgetService.setWidgetElement = this.elRef.nativeElement;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const feedbackOptions = changes.feedbackWidgetOptions;
-    if (feedbackOptions && feedbackOptions.firstChange) {
-         this.feedbackWidgetOptions = Object.assign(defaultFeedbackWidgetConfig, feedbackOptions.currentValue);
-    }
   }
 
   public onFeedbackStart(): void {

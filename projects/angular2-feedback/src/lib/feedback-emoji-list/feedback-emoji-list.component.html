@@ -1,15 +1,12 @@
 <ul [ngClass]="{'fw-emoji-list--intro': value === null}" class="fw-emoji-list">
-  <li
-    *ngFor="let emoji of feedbackEmojiList; let i = index"
-    class="fw-emoji-list__item"
-  >
+  <li *ngFor="let emoji of feedbackEmojiList; let i = index" class="fw-emoji-list__item">
     <div
       [ngClass]="{ 'fw-emoji--active': value === i + 1}"
       class="fw-emoji fw-emoji--{{emoji.emojiClass}}"
       (click)="onEmojiChosen(i + 1)"
     ></div>
-    <p *ngIf="value === null" class="fw-emoji__label-intro">
+    <span *ngIf="value === null" class="fw-emoji__label-intro">
       {{ emoji.emojiName | firstLetterUppercase }}
-    </p>
+    </span>
   </li>
 </ul>

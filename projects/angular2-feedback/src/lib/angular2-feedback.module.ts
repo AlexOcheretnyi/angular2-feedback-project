@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,6 +11,9 @@ import {FeedbackEmojiListComponent}    from './feedback-emoji-list/feedback-emoj
 import {FeedbackTextareaComponent}     from './feedback-textarea/feedback-textarea.component';
 import {Angular2FeedbackComponent} from './angular2-feedback/angular2-feedback.component';
 import { FirstLetterUppercasePipe } from '../shared/pipes/first-letter-uppercase.pipe';
+import {FeedbackWidgetOptions} from 'angular2-feedback';
+import {defaultFeedbackWidgetConfig} from '../configs';
+import {FEEDBACK_CONFIG} from '../const';
 
 @NgModule({
   declarations: [
@@ -33,4 +36,17 @@ import { FirstLetterUppercasePipe } from '../shared/pipes/first-letter-uppercase
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [Angular2FeedbackComponent]
 })
-export class Angular2FeedbackModule {}
+export class Angular2FeedbackModule {
+  static forRoot(config: FeedbackWidgetOptions = defaultFeedbackWidgetConfig): ModuleWithProviders {
+    return {
+      ngModule: Angular2FeedbackModule,
+      providers: [
+        Angular2FeedbackService,
+        {
+          provide: FEEDBACK_CONFIG,
+          useValue: defaultFeedbackWidgetConfig
+        }
+      ]
+    };
+  }
+}

@@ -14,6 +14,7 @@ import { FirstLetterUppercasePipe } from '../shared/pipes/first-letter-uppercase
 import {FeedbackWidgetOptions} from 'angular2-feedback';
 import {defaultFeedbackWidgetConfig} from '../configs';
 import {FEEDBACK_CONFIG} from '../const';
+import { Angular2FeedbackDirective } from './angular2-feedback.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {FEEDBACK_CONFIG} from '../const';
     FeedbackWidgetDialogComponent,
     FeedbackEmojiListComponent,
     FeedbackTextareaComponent,
-    FirstLetterUppercasePipe
+    FirstLetterUppercasePipe,
+    Angular2FeedbackDirective
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,7 @@ import {FEEDBACK_CONFIG} from '../const';
   providers: [Angular2FeedbackService],
   entryComponents: [FeedbackScreenshotComponent, FeedbackScreenshotWindowComponent, FeedbackWidgetDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [Angular2FeedbackComponent]
+  exports: [Angular2FeedbackComponent, Angular2FeedbackDirective]
 })
 export class Angular2FeedbackModule {
   static forRoot(config: FeedbackWidgetOptions = defaultFeedbackWidgetConfig): ModuleWithProviders {

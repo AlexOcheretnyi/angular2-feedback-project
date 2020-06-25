@@ -15,5 +15,6 @@ export const defaultFeedbackWidgetConfig: FeedbackWidgetOptions = {
   feedbackRateTitle: FEEDBACK_RATE_TITLE,
   feedbackEmailTitle: FEEDBACK_EMAIL_TITLE,
   feedbackPlaceholder: FEEDBACK_PLACEHOLDER,
-  emojiNames: ['very bad', 'dislike', 'neutral', 'like', 'very good']
+  emojiNames: ['very bad', 'dislike', 'neutral', 'like', 'very good'],
+  isVisibleByDefault: true
 };

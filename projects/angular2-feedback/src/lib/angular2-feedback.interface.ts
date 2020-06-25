@@ -1,9 +1,4 @@
-import {EmojiNames, FeedbackButtonSize, FeedbackPosition} from './angular2-feedback.type';
-
-export interface EmojiState {
-  type: string;
-  state: boolean;
-}
+import { EmojiNames, FeedbackButtonSize, FeedbackPosition } from './angular2-feedback.type';
 
 export interface FeedbackWidgetOptions {
   buttonSize?: FeedbackButtonSize;
@@ -15,6 +10,7 @@ export interface FeedbackWidgetOptions {
   feedbackEmailTitle?: string;
   feedbackPlaceholder?: string;
   emojiNames?: EmojiNames;
+  isVisibleByDefault?: boolean;
 }
 
 export interface FeedbackWidgetOutput {

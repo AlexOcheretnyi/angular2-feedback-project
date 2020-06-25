@@ -18,7 +18,7 @@ import { CustomControlValueAccessor } from '../../shared/custom-control-value-ac
 })
 export class FeedbackInputComponent extends CustomControlValueAccessor implements OnInit {
   @Input() placeholder: string = 'email@domain.com';
-  @Input() type: string = 'text';
+  @Input() type: string = 'email';
 
   constructor() {
     super();

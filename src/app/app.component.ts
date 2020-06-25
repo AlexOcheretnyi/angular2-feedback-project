@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Angular2FeedbackService} from '../../projects/angular2-feedback/src/lib/angular2-feedback.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular2-feedback-project';
 
-  onFeedbackFinished($event) {
-    console.log($event);
+  constructor(private feedbackService: Angular2FeedbackService) {}
+
+
+  onShow() {
+    this.feedbackService.showFeedback();
+  }
+
+  hide() {
+    this.feedbackService.hideFeedback();
   }
 }

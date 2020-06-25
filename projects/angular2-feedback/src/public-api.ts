@@ -6,3 +6,4 @@ export * from './lib/angular2-feedback/angular2-feedback.component';
 export * from './lib/angular2-feedback.module';
 export * from './lib/angular2-feedback.interface';
 export * from './lib/angular2-feedback.type';
+export * from './lib/angular2-feedback.directive';

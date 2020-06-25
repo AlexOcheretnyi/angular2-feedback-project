@@ -1,11 +1,15 @@
-import {Inject, Injectable, Optional} from '@angular/core';
+import { ComponentFactory, Inject, Injectable, Optional, ViewContainerRef } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import {FeedbackWidgetOptions, FeedbackWidgetOutput} from './angular2-feedback.interface';
-import {FEEDBACK_CONFIG} from '../const';
+import { FeedbackWidgetOptions, FeedbackWidgetOutput } from './angular2-feedback.interface';
+import { FEEDBACK_CONFIG } from '../const';
+import { Angular2FeedbackComponent } from './angular2-feedback/angular2-feedback.component';
 
 @Injectable()
 export class Angular2FeedbackService {
+
+  private _feedbackViewContainer: ViewContainerRef;
+  private _feedbackComponentFactory: ComponentFactory<Angular2FeedbackComponent>;
 
   private _feedbackWidgetClosed$: Subject<void> = new Subject<void>();
   private _feedbackScreenshotCreated$: Subject<void> = new Subject<void>();
@@ -19,6 +23,25 @@ export class Angular2FeedbackService {
   private _widgetElement: HTMLElement = null;
 
   constructor(@Inject(FEEDBACK_CONFIG) @Optional() public readonly feedbackConfig: FeedbackWidgetOptions) { }
+
+  public showFeedback(): void {
+    if (this._feedbackViewContainer.length) { return; }
+    this._feedbackViewContainer.clear();
+    this._feedbackViewContainer.createComponent(this._feedbackComponentFactory);
+  }
+
+  public hideFeedback(): void {
+    if (!this._feedbackViewContainer.length) { return; }
+    this._feedbackViewContainer.clear();
+  }
+
+  set setFeedbackViewContainer(viewContainer: ViewContainerRef) {
+    this._feedbackViewContainer = viewContainer;
+  }
+
+  set setFeedbackComponentFactory(componentFactory: ComponentFactory<Angular2FeedbackComponent>) {
+    this._feedbackComponentFactory = componentFactory;
+  }
 
   set setWidgetElement(element: HTMLElement) { this._widgetElement = element; }
 

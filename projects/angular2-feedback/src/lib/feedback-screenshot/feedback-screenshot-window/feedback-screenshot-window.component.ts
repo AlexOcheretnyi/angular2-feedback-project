@@ -125,17 +125,17 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   private _initClickSubscription() {
     this.windowClickSubscription = fromEvent(window, 'click')
       .pipe(
-        first(event => (event.target as HTMLElement).id !== 'fw-screenshot-button'),
-        map((event) => event.preventDefault()),
-        switchMap(() => interval(5))
+        skip(1),
+        first(),
+        map((event) => event.preventDefault())
       )
       .subscribe(() => {
-        this.removeListeners();
-        this.feedbackService.setScreenshotElement = this.selectedElement;
-        this._initScrollSubscription();
-        this.renderer2.removeClass(this.selectedElement, 'feedback-screenshot__elem--hover');
-        this.feedbackService.showFeedbackDialog();
-        this.isElementSelected = true;
+        // this.removeListeners();
+        // this.feedbackService.setScreenshotElement = this.selectedElement;
+        // this._initScrollSubscription();
+        // this.renderer2.removeClass(this.selectedElement, 'feedback-screenshot__elem--hover');
+        // this.feedbackService.showFeedbackDialog();
+        // this.isElementSelected = true;
       });
   }
 

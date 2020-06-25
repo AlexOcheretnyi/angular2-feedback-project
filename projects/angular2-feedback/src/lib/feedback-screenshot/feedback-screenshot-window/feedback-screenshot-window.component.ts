@@ -16,7 +16,9 @@ import { Angular2FeedbackService } from '../../angular2-feedback.service';
 })
 export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit {
   @Output() screenshotWindowClosed$: EventEmitter<void> = new EventEmitter<void>();
+
   public isElementSelected = false;
+  public selectedElement: HTMLElement;
 
   private windowMouseOverSubscription: Subscription;
   private windowMouseOutSubscription: Subscription;
@@ -33,6 +35,7 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   private eventCallback = (event) => {
     const target = event.target as HTMLElement;
     if (target.id === 'fw-screenshot-window-close') { return; }
+    this.selectedElement = target;
     this._recalculateElementSizes(target);
   }
 
@@ -124,16 +127,13 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
       .pipe(
         skip(1),
         first(),
-        map((event) => {
-          event.preventDefault();
-          return event.target;
-        })
+        map((event) => event.preventDefault())
       )
-      .subscribe((target: HTMLElement) => {
+      .subscribe(() => {
         this.removeListeners();
-        this.feedbackService.setScreenshotElement = target;
+        this.feedbackService.setScreenshotElement = this.selectedElement;
         this._initScrollSubscription();
-        this.renderer2.removeClass(target, 'feedback-screenshot__elem--hover');
+        this.renderer2.removeClass(this.selectedElement, 'feedback-screenshot__elem--hover');
         this.feedbackService.showFeedbackDialog();
         this.isElementSelected = true;
       });

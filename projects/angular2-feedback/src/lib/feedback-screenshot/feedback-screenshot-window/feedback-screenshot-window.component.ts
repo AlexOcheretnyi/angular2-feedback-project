@@ -125,7 +125,10 @@ export class FeedbackScreenshotWindowComponent implements OnInit, AfterViewInit 
   private _initClickSubscription() {
     this.windowClickSubscription = fromEvent(window, 'click')
       .pipe(
-        map((event) => event.preventDefault()),
+        map((event) => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }),
         skip(1),
         first()
       )

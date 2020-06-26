@@ -46,7 +46,20 @@ export class Angular2FeedbackModule {
         Angular2FeedbackService,
         {
           provide: FEEDBACK_CONFIG,
-          useValue: defaultFeedbackWidgetConfig
+          useValue: config
+        }
+      ]
+    };
+  }
+
+  static forFeature(): ModuleWithProviders {
+    return {
+      ngModule: Angular2FeedbackModule,
+      providers: [
+        Angular2FeedbackService,
+        {
+          provide: FEEDBACK_CONFIG,
+          useExisting: FEEDBACK_CONFIG
         }
       ]
     };

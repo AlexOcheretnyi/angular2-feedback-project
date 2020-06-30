@@ -1,4 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators }                                                           from '@angular/forms';
 
 import { FeedbackPosition, FeedbackEmojiName } from '../angular2-feedback.type';
@@ -6,6 +17,8 @@ import { Angular2FeedbackService }             from '../angular2-feedback.servic
 
 import html2canvas from 'html2canvas';
 import {HtmlTagsValidator} from '../../shared/validators/html-tags.validator';
+import {NavigationEnd, Router } from '@angular/router';
+import {Subscription} from 'rxjs';
 
 // @dynamic
 @Component({
@@ -14,7 +27,7 @@ import {HtmlTagsValidator} from '../../shared/validators/html-tags.validator';
   styleUrls: ['./feedback-widget-dialog.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
+export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('feedbackDialog') feedbackDialog: ElementRef;
 
   @Input() feedbackEmojiNames: FeedbackEmojiName[];
@@ -31,12 +44,19 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
     return this.feedbackForm.get('score').value !== null && !this.isFeedbackSubmitted;
   }
 
+  private routerSubscription: Subscription = null;
+
   constructor(private fb: FormBuilder,
               private renderer2: Renderer2,
-              private _feedbackWidgetService: Angular2FeedbackService) { }
+              private _feedbackWidgetService: Angular2FeedbackService,
+              @Optional() private router: Router) { }
 
   ngOnInit() {
     this._initForm();
+    if (this.router) {
+      this.feedbackForm.get('route').setValue(this.router.url);
+      this._listenRouterChange();
+    }
   }
 
   ngAfterViewInit() {
@@ -70,7 +90,8 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
           HtmlTagsValidator
         ]
-      ]
+      ],
+      route: [null]
     });
   }
 
@@ -89,5 +110,15 @@ export class FeedbackWidgetDialogComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.renderer2.removeClass(this.feedbackDialog.nativeElement, 'fw-dialog--arise');
     }, 1500);
+  }
+
+  private _listenRouterChange() {
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) { this.feedbackForm.get('route').setValue(this.router.url); }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.routerSubscription) { this.routerSubscription.unsubscribe(); }
   }
 }

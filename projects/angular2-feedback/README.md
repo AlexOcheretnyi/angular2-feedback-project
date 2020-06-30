@@ -77,8 +77,9 @@ The options and events that can be used when working with feedback widget.
     interface FeedbackWidgetOutput {
       email: string;
       score: number; // 1 - 5
-      screenshot: File;
+      screenshot: null | File;
       feedback: string;
+      route: null | url;
     }
    ```
   

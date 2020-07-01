@@ -79,7 +79,7 @@ The options and events that can be used when working with feedback widget.
       score: number; // 1 - 5
       screenshot: null | File;
       feedback: string;
-      route: null | url;
+      route: null | string;
     }
    ```
   
